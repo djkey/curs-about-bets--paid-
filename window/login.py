@@ -8,7 +8,10 @@ def login(db_cursor):
     root.title("Вход")
     Wheight = 220
     Wwidth =160
-    root.geometry(f"{Wheight}x{Wwidth}+100+50")
+    root.geometry(f"{Wheight}x{Wwidth}+{int((screen_width-Wwidth)/2)}+{int(screen_height/2)}")
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+    root.geometry(f"{int(screen_width/2)}x{int(screen_height/2)}+{int(screen_width/4)}+{int(screen_height/4)}")
     root.resizable(width=False, height=False)
 
     def on_login():
