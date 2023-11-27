@@ -1,45 +1,53 @@
-import tkinter as tk
-from tkinter import messagebox
 from tkinter import ttk
+from query.connect_to_db import query
+from window.__window import Window
 from window.registration import register
+from window.main_window import create_main_window
+from side_func import read_config
 
-def login(db_cursor):
-    root = tk.Tk()
-    root.title("Вход")
-    Wheight = 220
-    Wwidth =160
-    root.geometry(f"{Wheight}x{Wwidth}+{int((screen_width-Wwidth)/2)}+{int(screen_height/2)}")
-    screen_width = root.winfo_screenwidth()
-    screen_height = root.winfo_screenheight()
-    root.geometry(f"{int(screen_width/2)}x{int(screen_height/2)}+{int(screen_width/4)}+{int(screen_height/4)}")
-    root.resizable(width=False, height=False)
+
+def login():
+    root = Window(title='login',
+                  size= [220, 160],
+                  pos= [int(int(read_config(filename='config.ini', section='Screen size')['width'])/2)-110,
+                        int(int(read_config(filename='config.ini', section='Screen size')['height'])/2)-80],
+                  resize=[0, 0],
+                  rows= 4)
+
+    
+    root.info = ttk.Label(root)
+    root.info.grid(row= 0, column=0, columnspan=2)
+    root.username_label = ttk.Label(root, text='Login').grid(row=1, column=0, padx=10, pady=10, sticky='W')
+    root.username_entry = ttk.Entry(root)
+    root.username_entry.grid(row=1, column=1, padx=10, pady=10, sticky='W')
+    root.password_label = ttk.Label(root, text='Password').grid(row=2, column=0, padx=10, pady=10)
+    root.password_entry = ttk.Entry(root, show='*')
+    root.password_entry.grid(row=2, column=1, padx=10, pady=10)
+    
 
     def on_login():
-        username = entry_username.get()
-        password = entry_password.get()
+        username = root.username_entry.get()
+        password = root.password_entry.get()
 
-        db_cursor.execute(f"SELECT * FROM users WHERE username={username} AND password={password}")
-        result = db_cursor.fetchone()
-
+        result = query(f"SELECT user_id FROM users WHERE name='{username}' AND password='{password}'")
         if result:
-            messagebox.showinfo("Вход", "Вход выполнен успешно!")
+            root.destroy()  
+            create_main_window()
+            pass
         else:
-            messagebox.showerror("Ошибка", "Неправильный логин или пароль")
-
-    label_username = ttk.Label(root, text="Логин:")
-    label_password = ttk.Label(root, text="Пароль:")
-    entry_username = ttk.Entry(root)
-    entry_password = ttk.Entry(root, show="*")
-    label_register = tk.Label(root, text="Регистрация", fg="blue", cursor="hand2")
+            root.info.config(text='Ошибка!')
+        
+    def on_register():
+        register()
+        # переход к регистрации
     
-    label_username.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
-    label_password.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
-    entry_username.grid(row=0, column=1, padx=10, pady=10)
-    entry_password.grid(row=1, column=1, padx=10, pady=10)
-    label_register.grid(row=3, column=1, padx=0, pady=10, sticky="se")
-    label_register.bind("<Button-1>", lambda event: register(db_cursor))
-    button_login = tk.Button(root, text="Вход", command=on_login)
-    button_login.grid(row=2, column=0, columnspan=2, pady=10)
+    
+    root.login_button = ttk.Button(root, text="Войти", command=on_login).grid(row=3, columnspan=2)
+
+    root.label_register = ttk.Label(root, text="Регистрация", foreground="blue", cursor="hand2")
+    root.label_register.grid(row=4, column=1, padx=10, pady=10, sticky="se")
+    root.label_register.bind("<Button-1>", lambda event: on_register())
+
 
 
     root.mainloop()

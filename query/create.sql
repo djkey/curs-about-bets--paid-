@@ -1,73 +1,64 @@
 -- Таблица "Жокеї"
 CREATE TABLE Jockeys (
-    jockey_id INT PRIMARY KEY,
-    name VARCHAR(100),
-    gender VARCHAR(10),
-    age INT,
-    history TEXT
+    jockey_id       INTEGER  PRIMARY KEY,
+    name            TEXT     (100),
+    gender          TEXT     (10),
+    age             INTEGER,
+    description     TEXT
 );
 
 -- Таблица "Коні"
 CREATE TABLE Horses (
-    horse_id INT PRIMARY KEY,
-    name VARCHAR(100),
-    gender VARCHAR(10),
-    age INT,
-    color VARCHAR(15),
-    photo VARCHAR(255),
-    history TEXT
+    horse_id        INTEGER    PRIMARY KEY,
+    name            TEXT     (100),
+    gender          TEXT     (10),
+    age             INTEGER,
+    photo           TEXT     (255),
+    description     TEXT
 );
 
 -- Таблица "Забіги"
 CREATE TABLE Races (
-    race_id INT PRIMARY KEY,
-    date DATE,
-    winner_id INT,
-    winner_horse_id INT,
-    FOREIGN KEY (winner_id) REFERENCES Jockeys(jockey_id),
-    FOREIGN KEY (winner_horse_id) REFERENCES Horses(horse_id)
+    race_id         INTEGER     PRIMARY KEY,
+    date            DATE
 );
 
 -- Таблица "Користувачі"
 CREATE TABLE Users (
-    user_id INT PRIMARY KEY,
-    name VARCHAR(255),
-    gender VARCHAR(255),
-    age INT,
-    email VARCHAR(255),
-    phone_number VARCHAR(20),
-    root BOOLEAN
+    user_id         INTEGER     PRIMARY KEY,
+    name            TEXT        (255),
+    gender          TEXT        (10),
+    age             INTEGER     CHECK (age > 10 & age < 100),
+    email           TEXT        (20),
+    phone_number    TEXT        (20),
+    wallet          INTEGER     CHECK (wallet <= 0),
+    password        TEXT        (10),
+    photo           TEXT        (255),
+    root            INTEGER     DEFAULT (0) 
 );
 
 -- Таблица "Ставки"
 CREATE TABLE Bets (
-    bet_id INT PRIMARY KEY,
-    race_id INT,
-    jockey_id INT,
-    horse_id INT,
-    user_id INT,
-    FOREIGN KEY (race_id) REFERENCES Races(race_id),
-    FOREIGN KEY (jockey_id) REFERENCES Jockeys(jockey_id),
-    FOREIGN KEY (horse_id) REFERENCES Horses(horse_id),
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    bet_id    INTEGER PRIMARY KEY,
+    race_id   INTEGER,
+    jockey_id INTEGER,
+    horse_id  INTEGER,
+    user_id   INTEGER,
+    bet_size  INTEGER,
+    FOREIGN KEY (race_id)   REFERENCES Races    (race_id),
+    FOREIGN KEY (jockey_id) REFERENCES Jockeys  (jockey_id),
+    FOREIGN KEY (horse_id)  REFERENCES Horses   (horse_id),
+    FOREIGN KEY (user_id)   REFERENCES Users    (user_id) 
 );
 
 -- Таблица "Учасники забігу"
 CREATE TABLE RaceParticipants (
-    race_id INT,
-    jockey_id INT,
-    horse_id INT,
-    FOREIGN KEY (race_id) REFERENCES Races(race_id),
-    FOREIGN KEY (jockey_id) REFERENCES Jockeys(jockey_id),
-    FOREIGN KEY (horse_id) REFERENCES Horses(horse_id)
+    race_id   INTEGER,
+    jockey_id INTEGER,
+    horse_id  INTEGER,
+    winner    INTEGER       DEFAULT (0),
+    FOREIGN KEY (race_id)   REFERENCES Races    (race_id),
+    FOREIGN KEY (jockey_id) REFERENCES Jockeys  (jockey_id),
+    FOREIGN KEY (horse_id)  REFERENCES Horses   (horse_id) 
 );
 
--- Таблица "Переможці"
-CREATE TABLE Winners (
-    race_id INT UNIQUE,
-    jockey_id INT,
-    horse_id INT,
-    FOREIGN KEY (race_id) REFERENCES Races(race_id),
-    FOREIGN KEY (jockey_id) REFERENCES Jockeys(jockey_id),
-    FOREIGN KEY (horse_id) REFERENCES Horses(horse_id)
-);
