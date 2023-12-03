@@ -32,7 +32,7 @@ def login():
         result = query(f"SELECT user_id FROM users WHERE name='{username}' AND password='{password}'")
         if result:
             root.destroy()  
-            create_main_window()
+            create_main_window(result[0][0])
             pass
         else:
             root.info.config(text='Ошибка!')
