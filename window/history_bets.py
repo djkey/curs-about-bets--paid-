@@ -30,7 +30,7 @@ def create_history_bets(user):
         return results
     
     
-    root = Window(title="Создание новой ставки",
+    root = Window(title="Історія ставок",
                   size=[520,340],
                   pos=[int(int(read_config(filename='config.ini', section='Screen size')['width'])/2)-260,
                   int(int(read_config(filename='config.ini', section='Screen size')['height'])/2)-170],
@@ -38,15 +38,15 @@ def create_history_bets(user):
                   rows=4,
                   user_id=user)
     
-    root.win = ttk.Label(root, text='Победившие ставки', anchor='center')
+    root.win = ttk.Label(root, text='Переможні ставки', anchor='center')
     root.win.grid(row=1, column=0, columnspan=2, sticky="ew")
     
     root.table = ttk.Treeview(root, columns=("race_id", "jockey", "horse", "bet_size", "date"), show="headings")
     root.table.heading("race_id", text="ID гонки")
     root.table.heading("jockey", text="Жокей")
-    root.table.heading("horse", text="Лошадь")
-    root.table.heading("bet_size", text="Размер ставки")
-    root.table.heading("date", text="Дата заезда")
+    root.table.heading("horse", text="Коні")
+    root.table.heading("bet_size", text="Розмір ставки")
+    root.table.heading("date", text="Дата заїздів")
     
     data = win_los(1)
 
@@ -69,15 +69,15 @@ def create_history_bets(user):
 
 # ---------------------------------
 
-    root.lose = ttk.Label(root, text='Проигравшие ставки', anchor='center')
+    root.lose = ttk.Label(root, text='Програні ставки', anchor='center')
     root.lose.grid(row=3, column=0, columnspan=2, sticky="ew")
 
     root.table2 = ttk.Treeview(root, columns=("race_id", "jockey", "horse", "bet_size", "date"), show="headings")
     root.table2.heading("race_id", text="ID гонки")
     root.table2.heading("jockey", text="Жокей")
-    root.table2.heading("horse", text="Лошадь")
-    root.table2.heading("bet_size", text="Размер ставки")
-    root.table2.heading("date", text="Дата заезда")
+    root.table2.heading("horse", text="Коні")
+    root.table2.heading("bet_size", text="Розмір ставки")
+    root.table2.heading("date", text="Дата заїздів")
     
     data2 = win_los(0)
 

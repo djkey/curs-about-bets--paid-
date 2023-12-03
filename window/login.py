@@ -7,7 +7,7 @@ from side_func import read_config
 
 
 def login():
-    root = Window(title='login',
+    root = Window(title='Авторизація',
                   size= [220, 160],
                   pos= [int(int(read_config(filename='config.ini', section='Screen size')['width'])/2)-110,
                         int(int(read_config(filename='config.ini', section='Screen size')['height'])/2)-80],
@@ -17,10 +17,10 @@ def login():
     
     root.info = ttk.Label(root)
     root.info.grid(row= 0, column=0, columnspan=2)
-    root.username_label = ttk.Label(root, text='Login').grid(row=1, column=0, padx=10, pady=10, sticky='W')
+    root.username_label = ttk.Label(root, text='Логін').grid(row=1, column=0, padx=10, pady=10, sticky='W')
     root.username_entry = ttk.Entry(root)
     root.username_entry.grid(row=1, column=1, padx=10, pady=10, sticky='W')
-    root.password_label = ttk.Label(root, text='Password').grid(row=2, column=0, padx=10, pady=10)
+    root.password_label = ttk.Label(root, text='Пароль').grid(row=2, column=0, padx=10, pady=10)
     root.password_entry = ttk.Entry(root, show='*')
     root.password_entry.grid(row=2, column=1, padx=10, pady=10)
     
@@ -35,16 +35,16 @@ def login():
             create_main_window(result[0][0])
             pass
         else:
-            root.info.config(text='Ошибка!')
+            root.info.config(text='Помилка!')
         
     def on_register():
         register()
         # переход к регистрации
     
     
-    root.login_button = ttk.Button(root, text="Войти", command=on_login).grid(row=3, columnspan=2)
+    root.login_button = ttk.Button(root, text="Увійти", command=on_login).grid(row=3, columnspan=2)
 
-    root.label_register = ttk.Label(root, text="Регистрация", foreground="blue", cursor="hand2")
+    root.label_register = ttk.Label(root, text="Реєстрація", foreground="blue", cursor="hand2")
     root.label_register.grid(row=4, column=1, padx=10, pady=10, sticky="se")
     root.label_register.bind("<Button-1>", lambda event: on_register())
 

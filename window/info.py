@@ -11,7 +11,7 @@ from side_func import read_config
 def create_info(user):
             
             
-    info = Window(title='login',
+    info = Window(title='База знань',
                   size= [600, 300],
                   pos= [int(int(read_config(filename='config.ini', section='Screen size')['width'])/2)-300,
                         int(int(read_config(filename='config.ini', section='Screen size')['height'])/2)-150],
@@ -36,11 +36,11 @@ def create_info(user):
         info.scrollbar2.grid(row=4, column=1, columnspan=3, sticky="ew")
             
     
-    info.label1 = ttk.Label(info, text="Жокеи", cursor="hand2", foreground='blue')
+    info.label1 = ttk.Label(info, text="Жокеї", cursor="hand2", foreground='blue')
     info.label1.grid(row=1, column=0, pady=30)
     info.label1.bind("<Button-1>", lambda event: show_table(event, 1))
         
-    info.label2 = ttk.Label(info, text="Лошади", cursor="hand2", foreground='blue')
+    info.label2 = ttk.Label(info, text="Коні", cursor="hand2", foreground='blue')
     info.label2.grid(row=2, column=0, pady=30)
     info.label2.bind("<Button-1>", lambda event: show_table(event, 2))
     
@@ -53,10 +53,10 @@ def create_info(user):
     info.table1 = ttk.Treeview(info, columns=("jockey_id", "name", "gender", "age", "description"))
     info.table1["show"] = "headings"
     info.table1.heading("jockey_id", text="#")
-    info.table1.heading("name", text="Имя")
-    info.table1.heading("gender", text="Пол")
-    info.table1.heading("age", text="Возраст")
-    info.table1.heading("description", text="Описание")
+    info.table1.heading("name", text="І'мя")
+    info.table1.heading("gender", text="Стать")
+    info.table1.heading("age", text="Вік")
+    info.table1.heading("description", text="Опис")
     
     data = query(f'''SELECT *
                      FROM jockeys''')
@@ -76,9 +76,9 @@ def create_info(user):
     info.table2["show"] = "headings"
     info.table2.heading("horse_id", text="#")
     info.table2.heading("name", text="Кличка")
-    info.table2.heading("gender", text="Пол")
-    info.table2.heading("age", text="Возраст")
-    info.table2.heading("description", text="Описание")
+    info.table2.heading("gender", text="Стать")
+    info.table2.heading("age", text="Вік")
+    info.table2.heading("description", text="Опис")
     
     data = query(f'''SELECT horse_id, name, gender, age, description
                      FROM horses''')

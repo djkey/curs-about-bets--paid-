@@ -33,9 +33,9 @@ def create_main_window(user):
         user_id=user
     )
 
-    root.button1 = ttk.Button(root, text="Новая ставка", command=lambda: button_clicked(1))
-    root.button2 = ttk.Button(root, text="История ставок", command=lambda: button_clicked(2))
-    root.button3 = ttk.Button(root, text="База знаний", command=lambda: button_clicked(3))
+    root.button1 = ttk.Button(root, text="Нова ставка", command=lambda: button_clicked(1))
+    root.button2 = ttk.Button(root, text="Історія ставок", command=lambda: button_clicked(2))
+    root.button3 = ttk.Button(root, text="База знань", command=lambda: button_clicked(3))
 
     root.button1.grid(row=1, column=0, sticky="ew", padx=15, pady=15, ipadx=30, ipady=20)
     root.button2.grid(row=2, column=0, sticky="ew", padx=15, pady=15, ipadx=30, ipady=20)
@@ -57,9 +57,9 @@ def create_main_window(user):
     root.table = ttk.Treeview(root, columns=("race_id", "jockey", "horse", "bet_size", "date"), show="headings")
     root.table.heading("race_id", text="ID гонки")
     root.table.heading("jockey", text="Жокей")
-    root.table.heading("horse", text="Лошадь")
-    root.table.heading("bet_size", text="Размер ставки")
-    root.table.heading("date", text="Дата заезда")
+    root.table.heading("horse", text="Коні")
+    root.table.heading("bet_size", text="Розмір ставки")
+    root.table.heading("date", text="Дата заїздів")
     
     data = query(f'''SELECT bets.race_id, jockeys.name as Jockey, horses.name as Horse, bet_size, races.date
                      FROM bets

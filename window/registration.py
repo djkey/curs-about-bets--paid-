@@ -1,4 +1,3 @@
-# register.py
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
@@ -14,14 +13,14 @@ def dismiss(window):
 def register():
     register_window = Toplevel()
     register_window.resizable(0,0)
-    register_window.title("Регистрация")
+    register_window.title("Реєстрація")
     register_window.geometry(f'270x200+{int(int(read_config(filename='config.ini', section='Screen size')['width'])/2)-135}+{int(int(read_config(filename='config.ini', section='Screen size')['height'])/2)-100}')
     register_window.protocol("WM_DELETE_WINDOW", lambda: dismiss(register_window))
 
     def is_valid_age(*args):
         age = entry_age.get()
         if not age.isdigit():
-            message.config(text="Некорректный возраст", foreground="red")
+            message.config(text="Некоректний вік", foreground="red")
         else:
             message.config(text="")
 
@@ -45,15 +44,15 @@ def register():
             query(f"INSERT INTO users (name, password, gender, age, email, phone_number, root) VALUES ('{name}', '{password}', '{gender}', {age}, '{email}', '{phone}', {is_root})")
             dismiss(register_window)
         else:
-            message.config(text="Некорректные данные")
+            message.config(text="Некоректні дані")
             
 
-    label_name = ttk.Label(register_window, text="Логин:")
+    label_name = ttk.Label(register_window, text="Логін:")
     label_pass = ttk.Label(register_window, text="Пароль:")
-    label_gender = ttk.Label(register_window, text="Пол:")
-    label_age = ttk.Label(register_window, text="Возраст(10-100):")
+    label_gender = ttk.Label(register_window, text="Стать:")
+    label_age = ttk.Label(register_window, text="Вік(10-100):")
     label_email = ttk.Label(register_window, text="Email:")
-    label_phone = ttk.Label(register_window, text="Номер телефона:")
+    label_phone = ttk.Label(register_window, text="Номер телефону:")
     
     message = ttk.Label(register_window)
 
@@ -68,7 +67,7 @@ def register():
     var_root = tk.StringVar(value='0')
     check_root = ttk.Checkbutton(register_window, text="root", variable=var_root)
 
-    button_register = ttk.Button(register_window, text="Зарегистрироваться", command=on_register)
+    button_register = ttk.Button(register_window, text="Зареєструватися", command=on_register)
 
     label_name.grid(row=1, column=0, padx=10, pady=1, sticky='ew')
     entry_name.grid(row=1, column=1, padx=10, pady=1, sticky='ew')

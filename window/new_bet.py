@@ -6,7 +6,7 @@ from query.connect_to_db import query
 
 
 def create_new_bet(user):
-    root = Window(title="Создание новой ставки",
+    root = Window(title="Створення нової ставки",
                   size=[300,200],
                   pos=[int(int(read_config(filename='config.ini', section='Screen size')['width'])/2)-150,
                   int(int(read_config(filename='config.ini', section='Screen size')['height'])/2)-100],
@@ -15,10 +15,10 @@ def create_new_bet(user):
                   user_id=user)
     
     
-    ttk.Label(root, text="Выберите гонку:").grid(row=1, column=0, padx=10, pady=5)
-    ttk.Label(root, text="Выберите участника:").grid(row=2, column=0, padx=10, pady=5)
-    ttk.Label(root, text="Размер ставки:").grid(row=3, column=0, padx=10, pady=5)
-    ttk.Label(root, text="Возможный выигрыш:").grid(row=4, column=0, padx=10, pady=5)
+    ttk.Label(root, text="Виберіть гонку:").grid(row=1, column=0, padx=10, pady=5)
+    ttk.Label(root, text="Виберіть учасника:").grid(row=2, column=0, padx=10, pady=5)
+    ttk.Label(root, text="Розмір ставки:").grid(row=3, column=0, padx=10, pady=5)
+    ttk.Label(root, text="Можливий виграш:").grid(row=4, column=0, padx=10, pady=5)
     root.cooficient = ttk.Label(root, text="")
     root.cooficient.grid(row=4, column=1, padx=10, pady=5)
     
@@ -97,7 +97,7 @@ def create_new_bet(user):
         query(f'''UPDATE users SET wallet = {int(root.wallet-int(bet_size))} WHERE user_id = {user};''')
         root.destroy()
 
-    ttk.Button(root, text="Подтвердить ставку", command=confirm_bet).grid(row=5, column=0, columnspan=2, pady=5)
+    ttk.Button(root, text="Підтвердити ставку", command=confirm_bet).grid(row=5, column=0, columnspan=2, pady=5)
 
 
     

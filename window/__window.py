@@ -41,7 +41,7 @@ class Window(Tk):
 
         if self.user_id:
             # определение шапки
-            self.upper = ttk.Label(self, text=f'Hi, {query(f'''SELECT name FROM users WHERE user_id={self.user_id}''')[0][0]}')
+            self.upper = ttk.Label(self, text=f'Привіт, {query(f'''SELECT name FROM users WHERE user_id={self.user_id}''')[0][0]}')
             self.upper.grid(row=0, column=0, sticky="w", pady=0)
             
             self.wallet = query(f'''SELECT wallet FROM users WHERE user_id= {self.user_id}''')[0][0]
