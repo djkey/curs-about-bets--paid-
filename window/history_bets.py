@@ -27,6 +27,9 @@ def create_history_bets(user):
             date_object = datetime.strptime(date_string, "%Y-%m-%d")
             if result and result[0][0] == winner and date_object < current_date:
                 results.append((participant[0],participant[3],participant[4],participant[5],participant[6]))
+                
+                results.append(participant)
+                
         return results
     
     
